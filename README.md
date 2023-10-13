@@ -41,36 +41,41 @@ private final AtomicBoolean isMobileAdsInitializeCalled = new AtomicBoolean(fals
 > Setp 4. Anywhere in the On Create Bundle - 
 ```
   //Create GDPR_Message (1st part)------------------------------------------------------ 
-        ConsentRequestParameters params = new ConsentRequestParameters
-        .Builder()
-        .setTagForUnderAgeOfConsent(false)
-        .build();
+       
+         ConsentRequestParameters params = new ConsentRequestParameters
+                .Builder()
+                .setTagForUnderAgeOfConsent(false)
+                .build();
 
-    consentInformation = UserMessagingPlatform.getConsentInformation(this);
-    consentInformation.requestConsentInfoUpdate(
-        this,
-        params,
-        (OnConsentInfoUpdateSuccessListener) () -> {
-          UserMessagingPlatform.loadAndShowConsentFormIfRequired(
-            this,
-            (OnConsentFormDismissedListener) loadAndShowError -> {
-             
-              }
+        consentInformation = UserMessagingPlatform.getConsentInformation(this);
+        consentInformation.requestConsentInfoUpdate(
+                this,
+                params,
+                (ConsentInformation.OnConsentInfoUpdateSuccessListener) () -> {
+                    UserMessagingPlatform.loadAndShowConsentFormIfRequired(
+                            this,
+                            (ConsentForm.OnConsentFormDismissedListener) loadAndShowError -> {
+                                if (loadAndShowError != null) {
+                                    
+                                    
+                                }
 
-              // Consent has been gathered.
-              if (consentInformation.canRequestAds) {
-                initializeMobileAdsSdk();
-              }
-            }
-          );
-        },
-        (OnConsentInfoUpdateFailureListener) requestConsentError -> {
-          
-        });
+                                // Consent has been gathered.
+                                if (consentInformation.canRequestAds()) {
+                                    initializeMobileAdsSdk();
+                                }
+                            }
+                    );
+                },
+                (ConsentInformation.OnConsentInfoUpdateFailureListener) requestConsentError -> {
+                    
+                });
 
-    if (consentInformation.canRequestAds) {
-      initializeMobileAdsSdk();
-    }
+        
+        if (consentInformation.canRequestAds()) {
+            initializeMobileAdsSdk();
+        }
+
 ```
 > Step 5. Just below the last second bracket - 
 ```
