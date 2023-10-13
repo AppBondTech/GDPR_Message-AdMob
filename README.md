@@ -84,6 +84,7 @@ private final AtomicBoolean isMobileAdsInitializeCalled = new AtomicBoolean(fals
     if (isMobileAdsInitializeCalled.getAndSet(true)) {
       return;
     }
+}
 ```
 
 ## In Cooperation
