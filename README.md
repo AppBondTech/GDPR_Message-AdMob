@@ -7,7 +7,7 @@
   <h3 align="center">Create GDPR_Message(java)</h3>
 
   <p align="center">
-    Best Easy Way for In-App Update Implementation
+    Best Easy Way for Create GDPR_Message
     <br/>
     <br/>
     <a href=""><strong> For Details Video Tutorial »</strong></a>
