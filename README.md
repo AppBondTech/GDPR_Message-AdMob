@@ -55,11 +55,6 @@ private final AtomicBoolean isMobileAdsInitializeCalled = new AtomicBoolean(fals
                     UserMessagingPlatform.loadAndShowConsentFormIfRequired(
                             this,
                             (ConsentForm.OnConsentFormDismissedListener) loadAndShowError -> {
-                                if (loadAndShowError != null) {
-                                    
-                                    
-                                }
-
                                 // Consent has been gathered.
                                 if (consentInformation.canRequestAds()) {
                                     initializeMobileAdsSdk();
