@@ -47,24 +47,36 @@ private final AtomicBoolean isMobileAdsInitializeCalled = new AtomicBoolean(fals
                 .setTagForUnderAgeOfConsent(false)
                 .build();
 
-        consentInformation = UserMessagingPlatform.getConsentInformation(this);
-        consentInformation.requestConsentInfoUpdate(
-                this,
-                params,
-                (ConsentInformation.OnConsentInfoUpdateSuccessListener) () -> {
-                    UserMessagingPlatform.loadAndShowConsentFormIfRequired(
-                            this,
-                            (ConsentForm.OnConsentFormDismissedListener) loadAndShowError -> {
-                                // Consent has been gathered.
-                                if (consentInformation.canRequestAds()) {
-                                    initializeMobileAdsSdk();
-                                }
-                            }
-                    );
-                },
-                (ConsentInformation.OnConsentInfoUpdateFailureListener) requestConsentError -> {
+  consentInformation = UserMessagingPlatform.getConsentInformation(this);
+consentInformation.requestConsentInfoUpdate(
+     this,
+  params,
+ (ConsentInformation.OnConsentInfoUpdateSuccessListener) () -> {
+ UserMessagingPlatform.loadAndShowConsentFormIfRequired(
+   this,
+       (ConsentForm.OnConsentFormDismissedListener) loadAndShowError -> {
+if (loadAndShowError != null) {
+ // Consent gathering failed.
+ Log.w(TAG, String.format("%s: %s",
+ loadAndShowError.getErrorCode(),
+ loadAndShowError.getMessage()));
+  }
+
+      // Consent has been gathered.
+        if (consentInformation.canRequestAds()) {
+              initializeMobileAdsSdk();
+           }
+      }
+      );
+   },
+   (ConsentInformation.OnConsentInfoUpdateFailureListener) requestConsentError -> {
+
+ // Consent gathering failed.
+          Log.w(TAG, String.format("%s: %s",
+              requestConsentError.getErrorCode(),
+              requestConsentError.getMessage()));
                     
-                });
+  });
 
         
         if (consentInformation.canRequestAds()) {
