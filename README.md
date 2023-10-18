@@ -10,7 +10,7 @@
     Best Easy Way for Create GDPR_Message
     <br/>
     <br/>
-    <a href="https://youtu.be/pzFsuzdIUog?si=11HHsECNZsHwcjLu"><strong> For Details Video Tutorial »</strong></a>
+    <a href=""><strong> For Details Video Tutorial »</strong></a>
     <br/>
     <br/>
 	  
