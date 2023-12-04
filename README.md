@@ -91,9 +91,6 @@ if (loadAndShowError != null) {
     if (isMobileAdsInitializeCalled.getAndSet(true)) {
       return;
     }
-// Initialize the Google Mobile Ads SDK.
-    MobileAds.initialize(this);
-
 }
 ```
 
